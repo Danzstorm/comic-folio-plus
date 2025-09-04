@@ -24,23 +24,26 @@ const Header = () => {
 
   return (
     <>
-      {/* Promotional Banner */}
-      <div className="bg-gradient-secondary text-secondary-foreground py-2 px-4 text-center text-sm font-medium">
-        🚚 Envío GRATIS en pedidos superiores a €35 | 📚 Hasta 30% OFF en bestsellers
+      {/* Promotional Banner - Geek Style */}
+      <div className="bg-gradient-primary text-primary-foreground py-2 px-4 text-center text-sm font-medium font-hero overflow-hidden relative">
+        <div className="animate-pulse">
+          ⚡ POWER UP tu colección | 🎌 Envío express a toda la galaxia | 🏆 Level up con cada compra
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 opacity-20"></div>
       </div>
 
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
         <div className="container mx-auto px-4">
           {/* Main Header */}
           <div className="flex items-center justify-between py-4">
-            {/* Logo */}
-            <div className="flex items-center space-x-2">
-              <div className="bg-gradient-primary text-primary-foreground p-2 rounded-lg">
+            {/* Logo - Geek Style */}
+            <div className="flex items-center space-x-2 hover-glow">
+              <div className="bg-gradient-primary text-primary-foreground p-2 rounded-lg glow-pulse">
                 <Book className="h-6 w-6" />
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-xl font-bold text-primary">BookVerse</h1>
-                <p className="text-xs text-muted-foreground">Libros • Comics • Mangas</p>
+                <h1 className="text-xl font-bold text-primary font-hero">BookVerse</h1>
+                <p className="text-xs text-muted-foreground font-ui">📚 Libros • 🦸‍♂️ Comics • 🗾 Mangas</p>
               </div>
             </div>
 
@@ -50,8 +53,8 @@ const Header = () => {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                 <Input
                   type="search"
-                  placeholder="Buscar libros, comics, mangas..."
-                  className="pl-10 pr-4 w-full"
+                  placeholder="Busca tu próxima aventura épica..."
+                  className="pl-10 pr-4 w-full hover-glow font-ui bg-gradient-to-r from-background to-muted/20"
                   value={state.searchTerm}
                   onChange={(e) => handleSearch(e.target.value)}
                 />

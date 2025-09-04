@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
+/* Geek Culture Premium Design System */
 
 @tailwind base;
 @tailwind components;
@@ -8,18 +8,23 @@
 
 @layer base {
   :root {
-    /* Brand Colors - Premium bookstore palette */
-    --primary: 15 23% 15%;              /* Deep charcoal */
-    --primary-foreground: 0 0% 98%;     /* Off-white */
-    --primary-light: 15 15% 25%;        /* Lighter charcoal */
+    /* Geek Culture Premium Color Palette */
+    --primary-dark: 220 25% 4%;           /* Deep space black */
+    --primary: 15 23% 15%;                /* Deep charcoal */
+    --primary-foreground: 0 0% 98%;       /* Off-white */
+    --primary-light: 15 15% 25%;          /* Lighter charcoal */
     
-    --secondary: 24 100% 50%;           /* Warm amber accent */
-    --secondary-foreground: 15 23% 15%; /* Deep charcoal text */
-    --secondary-light: 24 100% 85%;     /* Light amber */
+    --primary-accent: 15 100% 58%;        /* Vibrant orange (chakra/energy) */
+    --secondary: 45 100% 50%;             /* Golden (treasures/collectibles) */
+    --secondary-foreground: 15 23% 15%;   /* Deep charcoal text */
+    --secondary-light: 45 100% 85%;       /* Light gold */
     
-    --accent: 200 95% 40%;              /* Premium blue */
-    --accent-foreground: 0 0% 98%;      /* White text */
-    --accent-light: 200 95% 90%;        /* Light blue */
+    --manga-purple: 248 53% 58%;          /* Mystical purple */
+    --comic-blue: 217 91% 60%;            /* Classic superhero blue */
+    --sage-green: 158 64% 52%;            /* Wisdom green */
+    --accent: 217 91% 60%;                /* Comic blue */
+    --accent-foreground: 0 0% 98%;        /* White text */
+    --accent-light: 217 91% 90%;          /* Light blue */
     
     /* Surface Colors */
     --background: 0 0% 100%;            /* Pure white */
@@ -45,10 +50,13 @@
     --destructive: 0 84% 60%;           /* Red */
     --destructive-foreground: 0 0% 98%; /* White */
     
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
+    /* Geek Culture Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary-dark)) 0%, hsl(var(--primary)) 50%, hsl(var(--primary-light)) 100%);
     --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-light)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 50%, hsl(var(--secondary)) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary-dark)) 0%, hsl(var(--primary)) 50%, hsl(var(--primary-light)) 100%);
+    --gradient-manga: linear-gradient(45deg, hsl(var(--manga-purple)) 0%, hsl(248 53% 68%) 100%);
+    --gradient-comic: linear-gradient(45deg, hsl(var(--comic-blue)) 0%, hsl(195 100% 60%) 100%);
+    --gradient-book: linear-gradient(45deg, hsl(var(--sage-green)) 0%, hsl(158 64% 42%) 100%);
     --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
     
     /* Shadows */
@@ -131,8 +139,30 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
   
+  /* Geek-Inspired Typography */
+  .font-hero {
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .font-manga {
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+  
+  .font-comic {
+    font-family: 'Bangers', cursive;
+    letter-spacing: 0.05em;
+  }
+  
+  .font-book {
+    font-family: 'Crimson Text', serif;
+  }
+  
+  .font-ui {
+    font-family: 'Inter', sans-serif;
+  }
+  
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Orbitron', sans-serif;
     @apply font-medium tracking-tight;
   }
 }
@@ -185,5 +215,77 @@
   
   .badge-bestseller {
     @apply bg-secondary text-secondary-foreground;
+  }
+  
+  /* Geek Culture Specific Gradients */
+  .bg-gradient-manga {
+    background: var(--gradient-manga);
+  }
+  
+  .bg-gradient-comic {
+    background: var(--gradient-comic);
+  }
+  
+  .bg-gradient-book {
+    background: var(--gradient-book);
+  }
+  
+  /* Geek Micro-interactions */
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-xl;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  
+  .hover-glow:hover {
+    filter: drop-shadow(0 0 8px hsl(var(--primary-accent) / 0.3));
+  }
+  
+  .comic-zoom {
+    @apply transform transition-transform duration-200 hover:scale-105;
+  }
+  
+  .manga-float {
+    @apply transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg;
+  }
+  
+  .book-tilt {
+    @apply transform transition-all duration-300 hover:rotate-1 hover:scale-105;
+  }
+  
+  /* Loading animations */
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 0 0 5px hsl(var(--primary-accent) / 0.5);
+    }
+    50% { 
+      box-shadow: 0 0 20px hsl(var(--primary-accent) / 0.8), 0 0 30px hsl(var(--primary-accent) / 0.6);
+    }
+  }
+  
+  .glow-pulse {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  /* Particle effects */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .floating {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  /* Category specific styling */
+  .category-book {
+    @apply border-l-4 border-sage-green;
+  }
+  
+  .category-comic {
+    @apply border-l-4 border-comic-blue;
+  }
+  
+  .category-manga {
+    @apply border-l-4 border-manga-purple;
   }
 }

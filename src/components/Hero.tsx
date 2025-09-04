@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Star, TrendingUp, Zap } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Star, ArrowRight, Zap, Heart, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -8,34 +8,37 @@ const Hero = () => {
 
   const heroSlides = [
     {
-      id: 1,
-      title: "Descubre Mundos Infinitos",
-      subtitle: "Los mejores libros, comics y mangas están aquí",
-      description: "Explora nuestra colección curada de historias que cambiarán tu perspectiva del mundo.",
-      cta: "Explorar Novedades",
-      badge: "Nuevo",
-      image: "bg-gradient-hero",
-      features: ["Envío gratis +€35", "Devoluciones 30 días", "Atención 24/7"]
+      title: "Tu próxima obsesión te está esperando",
+      subtitle: "Donde los mundos cobran vida",
+      description: "Descubre universos infinitos, desde épicas batallas ninja hasta romances galácticos",
+      cta: "Comenzar mi Aventura",
+      badge: "Otaku Zone",
+      rating: 4.9,
+      features: ["Portal a otros mundos", "Colecciones épicas", "Comunidad geek"],
+      theme: "anime",
+      bgClass: "bg-gradient-manga"
     },
     {
-      id: 2,
-      title: "Ofertas Especiales",
-      subtitle: "Hasta 50% de descuento en bestsellers",
-      description: "No te pierdas nuestras ofertas limitadas en los títulos más populares del momento.",
-      cta: "Ver Ofertas",
-      badge: "Oferta",
-      image: "bg-gradient-secondary",
-      features: ["Miles de títulos", "Precios imbatibles", "Stock limitado"]
+      title: "Donde los héroes cobran vida",
+      subtitle: "Universos épicos en cada página",
+      description: "Desde Gotham hasta el multiverso Marvel, cada comic es un portal a la grandeza",
+      cta: "Unirse a los Héroes",
+      badge: "Hero Zone",
+      rating: 4.8,
+      features: ["Poder ilimitado", "Ediciones legendarias", "Exclusivos de colección"],
+      theme: "comic",
+      bgClass: "bg-gradient-comic"
     },
     {
-      id: 3,
-      title: "Colección Premium",
-      subtitle: "Ediciones especiales y exclusivas",
-      description: "Encuentra ediciones únicas, libros firmados y contenido exclusivo para verdaderos coleccionistas.",
-      cta: "Ver Exclusivos",
-      badge: "Exclusivo",
-      image: "bg-gradient-primary",
-      features: ["Ediciones limitadas", "Contenido exclusivo", "Para coleccionistas"]
+      title: "Cada página es un portal",
+      subtitle: "Literatura que trasciende realidades",
+      description: "Desde clásicos inmortales hasta nuevos mundos por descubrir",
+      cta: "Abrir el Portal",
+      badge: "Mystic Library",
+      rating: 4.9,
+      features: ["Sabiduría infinita", "Clásicos inmortales", "Aventuras épicas"],
+      theme: "book",
+      bgClass: "bg-gradient-book"
     }
   ];
 
@@ -54,123 +57,181 @@ const Hero = () => {
     setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
   };
 
-  const currentHero = heroSlides[currentSlide];
+  const slide = heroSlides[currentSlide];
 
   return (
-    <section className="relative overflow-hidden">
-      <div className={`${currentHero.image} transition-all duration-1000 ease-in-out`}>
-        <div className="container mx-auto px-4 py-20 lg:py-32">
-          <div className="relative z-10 max-w-4xl">
-            <div className="flex items-center gap-4 mb-6">
-              <Badge className={`px-3 py-1 text-sm font-semibold ${
-                currentHero.badge === 'Nuevo' ? 'badge-new' :
-                currentHero.badge === 'Oferta' ? 'badge-sale' : 'badge-bestseller'
+    <section className={`relative overflow-hidden ${slide.bgClass || 'bg-gradient-hero'} min-h-[600px] flex items-center`}>
+      {/* Animated Background Pattern */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+        {slide.theme === 'anime' && (
+          <>
+            <div className="floating absolute top-20 right-20 w-4 h-4 bg-primary-accent rounded-full opacity-60"></div>
+            <div className="floating absolute top-32 left-32 w-2 h-2 bg-manga-purple rounded-full opacity-40" style={{ animationDelay: '1s' }}></div>
+            <div className="floating absolute bottom-40 right-20 w-3 h-3 bg-primary-accent rounded-full opacity-50" style={{ animationDelay: '2s' }}></div>
+          </>
+        )}
+        {slide.theme === 'comic' && (
+          <>
+            <div className="absolute top-32 left-32 text-6xl opacity-10 font-comic text-comic-blue transform rotate-12">POW!</div>
+            <div className="absolute bottom-32 right-32 text-4xl opacity-15 font-comic text-primary-accent transform -rotate-12">BAM!</div>
+          </>
+        )}
+        {slide.theme === 'book' && (
+          <>
+            <div className="absolute bottom-20 right-40 text-4xl opacity-15 font-book text-sage-green">✦</div>
+            <div className="absolute top-40 left-20 text-3xl opacity-10 font-book text-primary-accent">☽</div>
+            <div className="absolute top-20 right-1/3 text-2xl opacity-20 font-book text-sage-green">✧</div>
+          </>
+        )}
+      </div>
+      
+      {/* Content */}
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Column */}
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 mb-4">
+              <span className={`px-4 py-2 rounded-full text-sm font-medium glow-pulse ${
+                slide.theme === 'anime' ? 'bg-manga-purple text-white font-manga' :
+                slide.theme === 'comic' ? 'bg-comic-blue text-white font-comic' :
+                'bg-sage-green text-white font-book'
               }`}>
-                {currentHero.badge}
-              </Badge>
-              <div className="flex items-center gap-1 text-secondary">
-                <Star className="h-4 w-4 fill-current" />
-                <Star className="h-4 w-4 fill-current" />
-                <Star className="h-4 w-4 fill-current" />
-                <Star className="h-4 w-4 fill-current" />
-                <Star className="h-4 w-4 fill-current" />
-                <span className="text-sm font-medium text-white/90 ml-2">4.9/5 • 15,000+ reseñas</span>
+                {slide.badge}
+              </span>
+              <div className="flex items-center gap-1">
+                <div className="flex">
+                  {[...Array(5)].map((_, i) => (
+                    <Star 
+                      key={i} 
+                      className={`w-4 h-4 ${i < Math.floor(slide.rating) ? 'text-secondary fill-secondary' : 'text-muted-foreground'}`} 
+                    />
+                  ))}
+                </div>
+                <span className="text-sm text-primary-foreground ml-1">{slide.rating}</span>
               </div>
             </div>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              {currentHero.title}
+            <h1 className={`text-4xl lg:text-6xl font-bold text-primary-foreground leading-tight ${
+              slide.theme === 'anime' ? 'font-manga' :
+              slide.theme === 'comic' ? 'font-comic' :
+              'font-hero'
+            }`}>
+              {slide.title}
             </h1>
             
-            <p className="text-xl md:text-2xl text-white/90 mb-4 font-medium">
-              {currentHero.subtitle}
-            </p>
+            <h2 className={`text-xl lg:text-2xl text-primary-foreground/90 font-medium ${
+              slide.theme === 'anime' ? 'font-manga' :
+              slide.theme === 'comic' ? 'font-comic' :
+              'font-book'
+            }`}>
+              {slide.subtitle}
+            </h2>
             
-            <p className="text-lg text-white/80 mb-8 max-w-2xl leading-relaxed">
-              {currentHero.description}
+            <p className="text-lg text-primary-foreground/80 max-w-lg leading-relaxed font-ui">
+              {slide.description}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <Button size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 py-4 text-lg font-semibold transition-bounce">
-                {currentHero.cta}
-              </Button>
-              <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 px-8 py-4 text-lg">
-                Ver Catálogo Completo
-              </Button>
-            </div>
+            <Button size="lg" className={`font-semibold px-8 py-3 rounded-lg transition-all hover:scale-105 hover-glow ${
+              slide.theme === 'anime' ? 'bg-manga-purple hover:bg-manga-purple/90 text-white font-manga' :
+              slide.theme === 'comic' ? 'bg-comic-blue hover:bg-comic-blue/90 text-white font-comic text-lg' :
+              'bg-sage-green hover:bg-sage-green/90 text-white font-book'
+            }`}>
+              {slide.cta}
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
 
             {/* Features */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {currentHero.features.map((feature, index) => (
-                <div key={index} className="flex items-center gap-2 text-white/90">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+              {slide.features.map((feature, index) => (
+                <div key={index} className="flex items-center gap-2 text-primary-foreground/90">
                   <div className="bg-white/20 rounded-full p-1">
-                    {index === 0 && <TrendingUp className="h-4 w-4" />}
-                    {index === 1 && <Star className="h-4 w-4" />}
-                    {index === 2 && <Zap className="h-4 w-4" />}
+                    {index === 0 && <Zap className="h-4 w-4" />}
+                    {index === 1 && <Heart className="h-4 w-4" />}
+                    {index === 2 && <BookOpen className="h-4 w-4" />}
                   </div>
-                  <span className="text-sm font-medium">{feature}</span>
+                  <span className="text-sm font-medium font-ui">{feature}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Navigation Arrows */}
-          <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-20">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={prevSlide}
-              className="bg-white/10 hover:bg-white/20 text-white border-white/20 rounded-full p-2"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </Button>
+          {/* Right Column - Visual Element */}
+          <div className="hidden lg:flex justify-center items-center">
+            <div className={`relative w-80 h-80 rounded-full bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/20 flex items-center justify-center ${
+              slide.theme === 'anime' ? 'manga-float' :
+              slide.theme === 'comic' ? 'comic-zoom' :
+              'book-tilt'
+            }`}>
+              <div className={`text-8xl ${
+                slide.theme === 'anime' ? 'font-manga' :
+                slide.theme === 'comic' ? 'font-comic' :
+                'font-book'
+              } text-white/30`}>
+                {slide.theme === 'anime' ? '漫' :
+                 slide.theme === 'comic' ? '⚡' :
+                 '📚'}
+              </div>
+            </div>
           </div>
-          
-          <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-20">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={nextSlide}
-              className="bg-white/10 hover:bg-white/20 text-white border-white/20 rounded-full p-2"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </Button>
-          </div>
+        </div>
 
-          {/* Slide Indicators */}
-          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
-            {heroSlides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-smooth ${
-                  index === currentSlide ? 'bg-white' : 'bg-white/40'
-                }`}
-              />
-            ))}
-          </div>
+        {/* Navigation Arrows */}
+        <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-20">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={prevSlide}
+            className="bg-white/10 hover:bg-white/20 text-white border-white/20 rounded-full p-3 hover-glow"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </Button>
+        </div>
+        
+        <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-20">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={nextSlide}
+            className="bg-white/10 hover:bg-white/20 text-white border-white/20 rounded-full p-3 hover-glow"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </Button>
+        </div>
+
+        {/* Slide Indicators */}
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition-smooth ${
+                index === currentSlide ? 'bg-white glow-pulse' : 'bg-white/40'
+              }`}
+            />
+          ))}
         </div>
       </div>
 
-      {/* Trust Indicators */}
-      <div className="bg-white border-b">
-        <div className="container mx-auto px-4 py-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div>
-              <div className="text-2xl font-bold text-primary">50K+</div>
-              <div className="text-sm text-muted-foreground">Productos disponibles</div>
+      {/* Trust Indicators - Geek Culture */}
+      <div className="absolute bottom-0 left-0 right-0 bg-black/20 backdrop-blur-sm border-t border-white/10">
+        <div className="container mx-auto px-4 py-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
+            <div className="font-ui">
+              <div className="text-2xl font-bold font-hero">50K+</div>
+              <div className="text-xs opacity-80">Universos disponibles</div>
             </div>
-            <div>
-              <div className="text-2xl font-bold text-primary">15K+</div>
-              <div className="text-sm text-muted-foreground">Clientes satisfechos</div>
+            <div className="font-ui">
+              <div className="text-2xl font-bold font-hero">15K+</div>
+              <div className="text-xs opacity-80">Otakus satisfechos</div>
             </div>
-            <div>
-              <div className="text-2xl font-bold text-primary">24h</div>
-              <div className="text-sm text-muted-foreground">Envío express</div>
+            <div className="font-ui">
+              <div className="text-2xl font-bold font-hero">24h</div>
+              <div className="text-xs opacity-80">Entrega express</div>
             </div>
-            <div>
-              <div className="text-2xl font-bold text-primary">4.9★</div>
-              <div className="text-sm text-muted-foreground">Valoración media</div>
+            <div className="font-ui">
+              <div className="text-2xl font-bold font-hero">4.9★</div>
+              <div className="text-xs opacity-80">Nivel épico</div>
             </div>
           </div>
         </div>

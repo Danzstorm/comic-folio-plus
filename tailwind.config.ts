@@ -21,6 +21,11 @@ export default {
 			fontFamily: {
 				sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
 				serif: ['Playfair Display', 'serif'],
+				hero: ['Orbitron', 'sans-serif'],
+				manga: ['Noto Sans JP', 'sans-serif'],
+				comic: ['Bangers', 'cursive'],
+				book: ['Crimson Text', 'serif'],
+				ui: ['Inter', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -30,8 +35,10 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
+					dark: 'hsl(var(--primary-dark))',
 					foreground: 'hsl(var(--primary-foreground))',
-					light: 'hsl(var(--primary-light))'
+					light: 'hsl(var(--primary-light))',
+					accent: 'hsl(var(--primary-accent))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -76,7 +83,10 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				'manga-purple': 'hsl(var(--manga-purple))',
+				'comic-blue': 'hsl(var(--comic-blue))',
+				'sage-green': 'hsl(var(--sage-green))'
 			},
 			boxShadow: {
 				'premium': 'var(--shadow-premium)',
